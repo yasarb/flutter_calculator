@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+import 'package:flutter_calculator/ui/app.dart';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp();
-  }
-}
+void main() => runApp(App());
