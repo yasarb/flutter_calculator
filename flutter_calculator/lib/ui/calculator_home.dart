@@ -4,7 +4,14 @@ import 'package:flutter_calculator/ui/history_widget.dart';
 import 'package:flutter_calculator/ui/input_widget.dart';
 import 'package:flutter_calculator/ui/keypad_widget.dart';
 
-class CalculatorHome extends StatelessWidget {
+class CalculatorHome extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _CalculatorHomeState();
+  }
+}
+
+class _CalculatorHomeState extends State<CalculatorHome> {
   @override
   Widget build(BuildContext context) {
     var bodyWidget = _buildBody();

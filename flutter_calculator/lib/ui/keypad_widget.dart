@@ -1,49 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:flutter_calculator/bloc/bloc.dart';
 
 class KeypadWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var calcBloc = BlocProvider.of<CalculatorBloc>(context);
+
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           Row(
             children: <Widget>[
-              _makeButton('C', color: Colors.red),
-              _makeButton('+-'),
-              _makeButton('%'),
-              _makeButton('/'),
+              _makeButton('C', calcBloc, color: Colors.red),
+              _makeButton('±', calcBloc),
+              _makeButton('%', calcBloc),
+              _makeButton('/', calcBloc),
             ],
           ),
           Row(
             children: <Widget>[
-              _makeButton('7'),
-              _makeButton('8'),
-              _makeButton('9'),
-              _makeButton('x'),
+              _makeButton('7', calcBloc),
+              _makeButton('8', calcBloc),
+              _makeButton('9', calcBloc),
+              _makeButton('x', calcBloc),
             ],
           ),
           Row(
             children: <Widget>[
-              _makeButton('4'),
-              _makeButton('5'),
-              _makeButton('6'),
-              _makeButton('-'),
+              _makeButton('4', calcBloc),
+              _makeButton('5', calcBloc),
+              _makeButton('6', calcBloc),
+              _makeButton('-', calcBloc),
             ],
           ),
           Row(
             children: <Widget>[
-              _makeButton('1'),
-              _makeButton('2'),
-              _makeButton('3'),
-              _makeButton('+'),
+              _makeButton('1', calcBloc),
+              _makeButton('2', calcBloc),
+              _makeButton('3', calcBloc),
+              _makeButton('+', calcBloc),
             ],
           ),
           Row(
             children: <Widget>[
-              _makeButton('0', flex: 2),
-              _makeButton('.', flex: 1),
-              _makeButton('=', flex: 1, equalsBtn: true),
+              _makeButton('0', calcBloc, flex: 2),
+              _makeButton('.', calcBloc, flex: 1),
+              _makeButton('=', calcBloc, flex: 1, equalsBtn: true),
             ],
           )
         ],
@@ -52,7 +57,8 @@ class KeypadWidget extends StatelessWidget {
     );
   }
 
-  _makeButton(String val, {color: Colors.black87, equalsBtn: false, flex: 1}) {
+  _makeButton(String val, CalculatorBloc calcBloc,
+      {color: Colors.black87, equalsBtn: false, flex: 1}) {
     return Expanded(
       child: Container(
         decoration: _getGradient(equalsBtn),
@@ -68,7 +74,7 @@ class KeypadWidget extends StatelessWidget {
                 color: color),
           ),
           shape: Border.all(color: Colors.black26, width: 2.0, style: BorderStyle.solid),
-          onPressed: () => {print('x')},
+          onPressed: () => {calcBloc.dispatch(KeyPressedEvent(key: val))},
         ),
       ),
       flex: flex,
